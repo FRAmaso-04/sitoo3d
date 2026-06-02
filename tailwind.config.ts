@@ -1,19 +1,29 @@
-import type { Config } from "tailwindcss";
+import type { Config } from 'tailwindcss';
 
 const config: Config = {
-  content: [
-    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
-  ],
+  content: ['./src/**/*.{ts,tsx}'],
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        dark:        'var(--dark)',
+        red:         'var(--red)',
+        cream:       'var(--cream)',
+        'off-white': 'var(--white)',
+        smoke:       'var(--smoke)',
+      },
+      fontFamily: {
+        display: ['var(--font-bebas)', 'sans-serif'],
+        mono:    ['var(--font-mono)', 'monospace'],
+        jp:      ['var(--font-jp)', 'sans-serif'],
+        body:    ['var(--font-body)', 'sans-serif'],
+      },
+      letterSpacing: {
+        brand: '0.15em',
+        wide:  '0.25em',
       },
     },
   },
   plugins: [],
 };
+
 export default config;
