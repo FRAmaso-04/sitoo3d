@@ -1,0 +1,63 @@
+'use client';
+
+import { Suspense } from 'react';
+import { Canvas, useThree } from '@react-three/fiber';
+import { AdaptiveDpr } from '@react-three/drei';
+import * as THREE from 'three';
+
+function SceneLights() {
+  return (
+    <>
+      <hemisphereLight
+        color={new THREE.Color('#7E9AAA')}
+        groundColor={new THREE.Color('#C79A72')}
+        intensity={1.1}
+      />
+      <directionalLight
+        position={[6, 8, 4]}
+        color={new THREE.Color('#FFD580')}
+        intensity={2.2}
+        castShadow
+        shadow-mapSize={[1024, 1024]}
+      />
+      <directionalLight
+        position={[-4, 2, -5]}
+        color={new THREE.Color('#CC1111')}
+        intensity={0.45}
+      />
+    </>
+  );
+}
+
+function SceneFog() {
+  const { scene } = useThree();
+  scene.fog = new THREE.FogExp2(new THREE.Color('#C79A72'), 0.028);
+  return null;
+}
+
+interface ExperienceSceneProps {
+  activeIndex?: number;
+  onActiveChange?: (i: number) => void;
+}
+
+export default function ExperienceScene({
+  activeIndex = 0,
+  onActiveChange,
+}: ExperienceSceneProps) {
+  return (
+    <Canvas
+      dpr={[1, 2]}
+      camera={{ position: [0, 0, 3.5], fov: 45, near: 0.1, far: 200 }}
+      shadows
+      gl={{ antialias: true, alpha: false }}
+      style={{ position: 'absolute', inset: 0 }}
+    >
+      <AdaptiveDpr pixelated />
+      <SceneFog />
+      <SceneLights />
+      <Suspense fallback={null}>
+        {/* Environment and models will be added in Tasks 6–8 */}
+      </Suspense>
+    </Canvas>
+  );
+}

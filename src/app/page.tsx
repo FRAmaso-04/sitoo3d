@@ -1,16 +1,19 @@
+import dynamic from 'next/dynamic';
 import { ProgressProvider } from '@/lib/progress-context';
 import ScrollStage from '@/components/ui/ScrollStage';
+
+const ExperienceScene = dynamic(
+  () => import('@/components/scene/ExperienceScene'),
+  { ssr: false }
+);
 
 export default function Home() {
   return (
     <ProgressProvider>
       <main>
         <ScrollStage>
-          <div
-            className="w-full h-full flex items-center justify-center font-display text-4xl"
-            style={{ color: 'var(--cream)' }}
-          >
-            SCROLL STAGE PLACEHOLDER
+          <div className="relative w-full h-full">
+            <ExperienceScene />
           </div>
         </ScrollStage>
       </main>
