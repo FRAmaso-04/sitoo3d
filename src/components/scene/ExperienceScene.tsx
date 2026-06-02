@@ -9,6 +9,7 @@ import Clouds         from './Clouds';
 import FloatingIsland from './FloatingIsland';
 import Dust           from './Dust';
 import ModelCarousel  from './ModelCarousel';
+import CameraRig      from './CameraRig';
 
 function SceneLights() {
   return (
@@ -60,6 +61,7 @@ export default function ExperienceScene({
       <AdaptiveDpr pixelated />
       <SceneFog />
       <SceneLights />
+      <CameraRig />
       <Suspense fallback={null}>
         <SkyDome />
         <Clouds />
