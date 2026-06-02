@@ -4,7 +4,7 @@ import { useMemo, useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 
-const COUNT = 160;
+const COUNT = typeof window !== 'undefined' && window.innerWidth < 768 ? 60 : 160;
 
 export default function Dust() {
   const pointsRef = useRef<THREE.Points>(null);

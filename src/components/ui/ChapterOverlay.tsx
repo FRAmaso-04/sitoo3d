@@ -77,7 +77,7 @@ export default function ChapterOverlay({ onHotspotClick }: ChapterOverlayProps) 
         {chapter && (
           <motion.div
             key={chapter.id}
-            className={`absolute ${chapter.position} max-w-sm pointer-events-auto`}
+            className={`absolute ${chapter.position} w-[calc(100%-2rem)] sm:max-w-sm pointer-events-auto`}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}

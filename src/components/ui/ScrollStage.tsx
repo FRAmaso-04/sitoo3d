@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -22,6 +22,19 @@ export default function ScrollStage({ children, heightVh = 4 }: ScrollStageProps
     typeof window !== 'undefined'
       ? window.matchMedia('(prefers-reduced-motion: reduce)').matches
       : false;
+
+  const [scrollVh, setScrollVh] = useState(heightVh);
+
+  useEffect(() => {
+    const update = () => setScrollVh(window.innerWidth < 768 ? 3 : heightVh);
+    update();
+    window.addEventListener('resize', update);
+    return () => window.removeEventListener('resize', update);
+  }, [heightVh]);
+
+  useEffect(() => {
+    ScrollTrigger.refresh();
+  }, [scrollVh]);
 
   useGSAP(() => {
     if (!wrapperRef.current || !stickyRef.current) return;
@@ -47,7 +60,7 @@ export default function ScrollStage({ children, heightVh = 4 }: ScrollStageProps
   return (
     <div
       ref={wrapperRef}
-      style={{ height: `${heightVh * 100}vh` }}
+      style={{ height: `${scrollVh * 100}vh` }}
     >
       <div
         ref={stickyRef}
