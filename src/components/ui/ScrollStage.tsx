@@ -18,6 +18,11 @@ export default function ScrollStage({ children, heightVh = 4 }: ScrollStageProps
   const stickyRef   = useRef<HTMLDivElement>(null);
   const progressRef = useProgressRef();
 
+  const prefersReduced =
+    typeof window !== 'undefined'
+      ? window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      : false;
+
   useGSAP(() => {
     if (!wrapperRef.current || !stickyRef.current) return;
 
@@ -27,7 +32,7 @@ export default function ScrollStage({ children, heightVh = 4 }: ScrollStageProps
         start:    'top top',
         end:      'bottom bottom',
         pin:      stickyRef.current,
-        scrub:    0.5,
+        scrub:    prefersReduced ? true : 0.5,
         onUpdate: (self) => {
           progressRef.current = self.progress;
         },

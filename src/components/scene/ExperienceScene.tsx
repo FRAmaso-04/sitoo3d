@@ -1,6 +1,6 @@
 'use client';
 
-import { Suspense } from 'react';
+import { Suspense, useState, useEffect } from 'react';
 import { Canvas, useThree } from '@react-three/fiber';
 import { AdaptiveDpr } from '@react-three/drei';
 import * as THREE from 'three';
@@ -10,6 +10,19 @@ import FloatingIsland from './FloatingIsland';
 import Dust           from './Dust';
 import ModelCarousel  from './ModelCarousel';
 import CameraRig      from './CameraRig';
+import NoWebGLFallback from '../ui/NoWebGLFallback';
+
+function isWebGLAvailable(): boolean {
+  try {
+    const canvas = document.createElement('canvas');
+    return !!(
+      window.WebGLRenderingContext &&
+      (canvas.getContext('webgl') || canvas.getContext('experimental-webgl'))
+    );
+  } catch {
+    return false;
+  }
+}
 
 function SceneLights() {
   return (
@@ -50,6 +63,14 @@ export default function ExperienceScene({
   activeIndex = 0,
   onActiveChange,
 }: ExperienceSceneProps) {
+  const [webgl, setWebgl] = useState(true);
+
+  useEffect(() => {
+    setWebgl(isWebGLAvailable());
+  }, []);
+
+  if (!webgl) return <NoWebGLFallback />;
+
   return (
     <Canvas
       dpr={[1, 2]}

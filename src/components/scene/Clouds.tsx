@@ -30,6 +30,10 @@ interface CloudDatum {
 export default function Clouds() {
   const groupRef = useRef<THREE.Group>(null);
   const texture  = useMemo(() => buildCloudTexture(256), []);
+  const reduced =
+    typeof window !== 'undefined'
+      ? window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      : false;
 
   const clouds: CloudDatum[] = useMemo(() => {
     const rng = (min: number, max: number) => Math.random() * (max - min) + min;
@@ -49,7 +53,7 @@ export default function Clouds() {
   useFrame((_state, dt) => {
     if (!groupRef.current) return;
     groupRef.current.children.forEach((sprite, i) => {
-      sprite.position.x += clouds[i].speed * dt;
+      sprite.position.x += clouds[i].speed * dt * (reduced ? 0.05 : 1);
       if (sprite.position.x > 50) sprite.position.x = -50;
     });
   });

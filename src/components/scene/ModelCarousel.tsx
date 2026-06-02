@@ -37,6 +37,10 @@ export default function ModelCarousel({
   activeIndex: controlledIndex = 0,
   onActiveChange,
 }: ModelCarouselProps) {
+  const reduced =
+    typeof window !== 'undefined'
+      ? window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      : false;
   const progressRef = useProgressRef();
   const activeRef   = useRef(0);
   const { raycaster, camera, gl } = useThree();
@@ -108,7 +112,7 @@ export default function ModelCarousel({
       mesh.scale.setScalar(state.scale);
 
       const isActive  = i === active;
-      const spinSpeed = isActive ? (0.05 + 0.4 * ef) : 0.12;
+      const spinSpeed = reduced ? 0 : (isActive ? (0.05 + 0.4 * ef) : 0.12);
       state.rot += dt * spinSpeed;
       mesh.rotation.y = state.rot;
       mesh.rotation.z = Math.sin(state.time * 0.25) * 0.02;
