@@ -50,7 +50,11 @@ function SceneLights() {
 
 function SceneFog() {
   const { scene } = useThree();
-  scene.fog = new THREE.FogExp2(new THREE.Color('#C79A72'), 0.028);
+  useEffect(() => {
+    const fog = new THREE.FogExp2(new THREE.Color('#C79A72'), 0.028);
+    scene.fog = fog;
+    return () => { scene.fog = null; };
+  }, [scene]);
   return null;
 }
 

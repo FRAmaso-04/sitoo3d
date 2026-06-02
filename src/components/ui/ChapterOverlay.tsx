@@ -62,7 +62,8 @@ export default function ChapterOverlay({ onHotspotClick }: ChapterOverlayProps) 
     const tick = () => {
       const p      = progressRef.current;
       const active = CHAPTERS.find((c) => p >= c.start && p <= c.end);
-      setActiveId(active?.id ?? null);
+      const newId  = active?.id ?? null;
+      setActiveId((prev) => (prev !== newId ? newId : prev));
       rafRef.current = requestAnimationFrame(tick);
     };
     rafRef.current = requestAnimationFrame(tick);
