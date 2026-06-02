@@ -8,6 +8,7 @@ import SkyDome        from './SkyDome';
 import Clouds         from './Clouds';
 import FloatingIsland from './FloatingIsland';
 import Dust           from './Dust';
+import ModelCarousel  from './ModelCarousel';
 
 function SceneLights() {
   return (
@@ -64,7 +65,7 @@ export default function ExperienceScene({
         <Clouds />
         <FloatingIsland />
         <Dust />
-        {/* Models will be added in Tasks 7–8 */}
+        <ModelCarousel activeIndex={activeIndex} onActiveChange={onActiveChange} />
       </Suspense>
     </Canvas>
   );
