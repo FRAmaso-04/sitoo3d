@@ -4,6 +4,10 @@ import { Suspense } from 'react';
 import { Canvas, useThree } from '@react-three/fiber';
 import { AdaptiveDpr } from '@react-three/drei';
 import * as THREE from 'three';
+import SkyDome        from './SkyDome';
+import Clouds         from './Clouds';
+import FloatingIsland from './FloatingIsland';
+import Dust           from './Dust';
 
 function SceneLights() {
   return (
@@ -56,7 +60,11 @@ export default function ExperienceScene({
       <SceneFog />
       <SceneLights />
       <Suspense fallback={null}>
-        {/* Environment and models will be added in Tasks 6–8 */}
+        <SkyDome />
+        <Clouds />
+        <FloatingIsland />
+        <Dust />
+        {/* Models will be added in Tasks 7–8 */}
       </Suspense>
     </Canvas>
   );
