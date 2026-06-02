@@ -100,7 +100,9 @@ export default function ModelCarousel({
       state.time += dt;
 
       const slot        = getSlot(active, i, total);
-      const targetScale = slot ? slot.scale * ef : 0;
+      const isCenter    = slot === SLOT_CENTER;
+      // Centre model always visible (scale 1); side models fade in with exploreFactor
+      const targetScale = slot ? (isCenter ? slot.scale : slot.scale * ef) : 0;
       const targetPos   = slot
         ? slot.pos
         : (i < active ? SLOT_LEFT.pos : SLOT_RIGHT.pos);
@@ -111,8 +113,9 @@ export default function ModelCarousel({
       mesh.position.copy(state.pos);
       mesh.scale.setScalar(state.scale);
 
-      const isActive  = i === active;
-      const spinSpeed = reduced ? 0 : (isActive ? (0.05 + 0.4 * ef) : 0.12);
+      const isActive = i === active;
+      // During scroll the camera orbits — no model spin. Idle spin kicks in only in explore mode.
+      const spinSpeed = reduced ? 0 : (isActive ? 0.45 * ef : 0.12 * ef);
       state.rot += dt * spinSpeed;
       mesh.rotation.y = state.rot;
       mesh.rotation.z = Math.sin(state.time * 0.25) * 0.02;

@@ -6,7 +6,6 @@ import { AdaptiveDpr } from '@react-three/drei';
 import * as THREE from 'three';
 import SkyDome        from './SkyDome';
 import Clouds         from './Clouds';
-import FloatingIsland from './FloatingIsland';
 import Dust           from './Dust';
 import ModelCarousel  from './ModelCarousel';
 import CameraRig      from './CameraRig';
@@ -78,7 +77,7 @@ export default function ExperienceScene({
   return (
     <Canvas
       dpr={[1, 2]}
-      camera={{ position: [0, 0, 3.5], fov: 45, near: 0.1, far: 200 }}
+      camera={{ position: [0, 0, 5.0], fov: 45, near: 0.1, far: 200 }}
       shadows
       gl={{ antialias: true, alpha: false }}
       style={{ position: 'absolute', inset: 0 }}
@@ -90,7 +89,6 @@ export default function ExperienceScene({
       <Suspense fallback={null}>
         <SkyDome />
         <Clouds />
-        <FloatingIsland />
         <Dust />
         <ModelCarousel activeIndex={activeIndex} onActiveChange={onActiveChange} />
       </Suspense>

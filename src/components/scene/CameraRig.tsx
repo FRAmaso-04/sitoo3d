@@ -7,11 +7,11 @@ import { useProgressRef } from '@/lib/progress-context';
 import { smoothstep, lerp, damp } from '@/lib/utils';
 
 const KEYFRAMES = [
-  { p: 0.00, theta:    0, r: 3.5, y: 0.0, ly: 0.0 },
-  { p: 0.28, theta:  -55, r: 2.5, y: 0.3, ly: 0.3 },
-  { p: 0.55, theta: -180, r: 3.8, y: 0.1, ly: 0.0 },
-  { p: 0.80, theta: -300, r: 4.6, y: 0.6, ly: 0.0 },
-  { p: 1.00, theta: -360, r: 5.6, y: 0.7, ly: 0.0 },
+  { p: 0.00, theta:    0, r: 5.0, y: 0.0, ly:  0.0 },
+  { p: 0.28, theta:  -55, r: 3.8, y: 0.2, ly:  0.2 },
+  { p: 0.55, theta: -180, r: 5.2, y: 0.1, ly:  0.0 },
+  { p: 0.80, theta: -300, r: 5.5, y: 0.2, ly:  0.1 },
+  { p: 1.00, theta: -360, r: 6.2, y: 0.2, ly: -0.2 },
 ] as const;
 
 type Keyframe = { p: number; theta: number; r: number; y: number; ly: number };
@@ -41,7 +41,7 @@ function sampleKeyframes(progress: number) {
 
 export default function CameraRig() {
   const progressRef = useProgressRef();
-  const curPos  = useRef(new THREE.Vector3(0, 0, 3.5));
+  const curPos  = useRef(new THREE.Vector3(0, 0, 5.0));
   const curLook = useRef(new THREE.Vector3(0, 0, 0));
 
   useFrame((state, dt) => {
