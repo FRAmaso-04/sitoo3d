@@ -114,8 +114,10 @@ export default function ModelCarousel({
       mesh.scale.setScalar(state.scale);
 
       const isActive = i === active;
-      // During scroll the camera orbits — no model spin. Idle spin kicks in only in explore mode.
-      const spinSpeed = reduced ? 0 : (isActive ? 0.45 * ef : 0.12 * ef);
+      // Spin lenta costante come il globo wireframe, sempre attiva.
+      // Active: 0.09 base + piccolo boost a fine scroll. Laterali: 0.045 base.
+      const baseSpeed = reduced ? 0 : (isActive ? 0.09 : 0.045);
+      const spinSpeed = baseSpeed + (isActive && !reduced ? 0.12 * ef : 0);
       state.rot += dt * spinSpeed;
       mesh.rotation.y = state.rot;
       mesh.rotation.z = Math.sin(state.time * 0.25) * 0.02;

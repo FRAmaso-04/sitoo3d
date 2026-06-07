@@ -13,7 +13,7 @@ interface ScrollStageProps {
   heightVh?: number;
 }
 
-export default function ScrollStage({ children, heightVh = 4 }: ScrollStageProps) {
+export default function ScrollStage({ children, heightVh = 6 }: ScrollStageProps) {
   const wrapperRef  = useRef<HTMLDivElement>(null);
   const stickyRef   = useRef<HTMLDivElement>(null);
   const progressRef = useProgressRef();
@@ -46,6 +46,11 @@ export default function ScrollStage({ children, heightVh = 4 }: ScrollStageProps
         end:      'bottom bottom',
         pin:      stickyRef.current,
         scrub:    prefersReduced ? true : 0.5,
+        snap:     prefersReduced ? undefined : {
+          snapTo:   [0, 0.15, 0.30, 0.45, 0.55, 1.0],
+          duration: { min: 0.3, max: 0.6 },
+          ease:     'power2.out',
+        },
         onUpdate: (self) => {
           progressRef.current = self.progress;
         },

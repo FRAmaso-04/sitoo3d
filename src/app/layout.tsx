@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Bebas_Neue, Space_Mono, Noto_Sans_JP, Space_Grotesk } from 'next/font/google';
+import { Bebas_Neue, Space_Mono, Noto_Sans_JP, Space_Grotesk, Press_Start_2P } from 'next/font/google';
 import './globals.css';
 
 const bebasNeue = Bebas_Neue({
@@ -29,6 +29,13 @@ const spaceGrotesk = Space_Grotesk({
   display: 'swap',
 });
 
+const pressStart2P = Press_Start_2P({
+  weight: '400',
+  subsets: ['latin'],
+  variable: '--font-pixel',
+  display: 'swap',
+});
+
 export const metadata: Metadata = {
   title: 'Never Stop Exploring — Drop Collection Since 2004',
   description:
@@ -47,7 +54,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html
       lang="it"
-      className={`${bebasNeue.variable} ${spaceMono.variable} ${notoSansJP.variable} ${spaceGrotesk.variable}`}
+      className={`${bebasNeue.variable} ${spaceMono.variable} ${notoSansJP.variable} ${spaceGrotesk.variable} ${pressStart2P.variable}`}
     >
       <body>{children}</body>
     </html>

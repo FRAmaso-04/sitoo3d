@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useProgressRef } from '@/lib/progress-context';
+import EightBitButton from './8bit-button';
 
 interface Chapter {
   id: number;
@@ -29,14 +30,14 @@ const CHAPTERS: Chapter[] = [
     position: 'bottom-8 right-8',
     kicker: 'MATERIAL 001',
     title: 'HEAVYWEIGHT COTTON',
-    body: '280gsm ring-spun cotton · pre-shrunk · garment-dyed',
+    body: '280gsm ring-spun · pre-shrunk · garment-dyed',
   },
   {
     id: 3, start: 0.54, end: 0.72,
     position: 'bottom-8 left-8',
     kicker: 'THE BACK / 背面',
     title: 'THE RED PINE',
-    body: 'Un punto cliccabile sulla grafica apre la storia del brand.',
+    body: 'Ogni punto racconta l\'esplorazione.',
     hasHotspot: true,
   },
   {
@@ -85,42 +86,67 @@ export default function ChapterOverlay({ onHotspotClick }: ChapterOverlayProps) 
             transition={{ duration: 0.55, ease: EASE }}
             style={{ padding: '32px' }}
           >
-            <p
-              className="font-mono text-red tracking-brand text-xs uppercase mb-2"
-              style={{ textShadow: '0 2px 34px rgba(10,6,2,.6)' }}
-            >
-              {chapter.kicker}
-            </p>
+            {/* Chapter index in pixel font */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 8 }}>
+              <span
+                className="font-pixel"
+                style={{ fontSize: '0.38rem', color: 'var(--smoke)', letterSpacing: '0.15em' }}
+              >
+                {String(chapter.id).padStart(2, '0')} /
+              </span>
+              {/* Kicker — pixel font, red */}
+              <p
+                className="font-pixel"
+                style={{
+                  fontSize: '0.38rem',
+                  color: 'var(--red)',
+                  letterSpacing: '0.15em',
+                }}
+              >
+                {chapter.kicker}
+              </p>
+            </div>
+
+            {/* Title — stays Bebas Neue */}
             <h2
-              className="font-display text-off-white text-5xl leading-none tracking-brand uppercase"
-              style={{ textShadow: '0 2px 34px rgba(10,6,2,.6)' }}
+              className="font-display leading-none tracking-brand uppercase"
+              style={{
+                fontSize: 'clamp(2rem, 5vw, 3.5rem)',
+                color: 'var(--dark)',
+              }}
             >
               {chapter.title}
             </h2>
+
             {chapter.jp && (
               <p
-                className="font-jp text-cream text-lg mt-2 tracking-wide"
-                style={{ textShadow: '0 2px 34px rgba(10,6,2,.6)' }}
+                className="font-jp text-lg mt-2 tracking-wide"
+                style={{ color: 'var(--smoke)' }}
               >
                 {chapter.jp}
               </p>
             )}
+
             {chapter.body && (
               <p
-                className="font-body text-smoke text-sm mt-3 leading-relaxed"
-                style={{ textShadow: '0 2px 34px rgba(10,6,2,.6)' }}
+                className="font-pixel mt-3"
+                style={{
+                  fontSize: '0.38rem',
+                  color: 'rgba(90,82,70,0.85)',
+                  letterSpacing: '0.08em',
+                  lineHeight: 1.9,
+                }}
               >
                 {chapter.body}
               </p>
             )}
+
             {chapter.hasHotspot && (
-              <button
-                onClick={onHotspotClick}
-                className="mt-4 border border-red text-red font-mono text-xs tracking-brand px-4 py-2 uppercase hover:bg-red hover:text-white transition-colors"
-                style={{ borderRadius: '2px' }}
-              >
-                VIEW STORY →
-              </button>
+              <div style={{ marginTop: 16 }}>
+                <EightBitButton variant="outline" onClick={onHotspotClick}>
+                  VIEW STORY →
+                </EightBitButton>
+              </div>
             )}
           </motion.div>
         )}

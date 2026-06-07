@@ -22,22 +22,21 @@ export default function ScrollHint() {
     <AnimatePresence>
       {visible && (
         <motion.div
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3"
           style={{ zIndex: 20 }}
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
         >
-          <p className="font-mono text-smoke text-xs tracking-brand uppercase">
-            SCROLL TO EXPLORE
-          </p>
-          <motion.div
-            className="w-px bg-smoke"
-            style={{ height: 32 }}
-            animate={{ scaleY: [1, 0.4, 1] }}
-            transition={{ duration: 1.4, repeat: Infinity, ease: 'easeOut' }}
-          />
+          <motion.span
+            className="font-pixel"
+            style={{ fontSize: '0.42rem', color: 'var(--smoke)', letterSpacing: '0.2em' }}
+            animate={{ opacity: [0.4, 1, 0.4] }}
+            transition={{ duration: 1.6, repeat: Infinity, ease: 'linear' }}
+          >
+            ▼ SCROLL ▼
+          </motion.span>
         </motion.div>
       )}
     </AnimatePresence>

@@ -3,20 +3,21 @@
 @tailwind utilities;
 
 :root {
-  /* Brand */
-  --dark:       #080808;
-  --red:        #CC1111;
-  --cream:      #E8D5B0;
-  --white:      #F5F5F0;
-  --smoke:      #5A5246;
+  /* Brand — nuova palette */
+  --dark:       #343434;   /* charcoal caldo */
+  --red:        #B56152;   /* terracotta morbido */
+  --cream:      #DDE3C0;   /* sage cream chiaro */
+  --white:      #F5F2EC;   /* bianco carta */
+  --smoke:      #948466;   /* taupe caldo */
+  --teal:       #749A96;   /* salvia/teal muted */
 
-  /* Sky gradient stops */
-  --sky-top:    #3E6E94;
-  --sky-mid:    #7E9AAA;
-  --sky-coral:  #C9784E;
-  --sky-warm:   #DBAE7E;
-  --sky-paper:  #EBD9B6;
-  --fog:        #C79A72;
+  /* Sky gradient — in armonia con la nuova palette */
+  --sky-top:    #8CB5B1;   /* teal chiaro in alto */
+  --sky-mid:    #749A96;   /* teal mid */
+  --sky-coral:  #B56152;   /* terracotta tramonto */
+  --sky-warm:   #C4A882;   /* oro caldo */
+  --sky-paper:  #DDE3C0;   /* sage cream all'orizzonte */
+  --fog:        #C4A882;   /* foschia dorata */
 }
 
 *, *::before, *::after {
@@ -65,4 +66,27 @@ body::before {
 
 @media (prefers-reduced-motion: reduce) {
   body::after { animation: none; }
+}
+
+/* ── Pixel / 8-bit utilities ── */
+.font-pixel { font-family: var(--font-pixel), monospace; }
+
+.border-pixel {
+  border: none;
+  border-radius: 0;
+  box-shadow:
+    0 -4px 0 0 currentColor,
+    0  4px 0 0 currentColor,
+   -4px 0  0 0 currentColor,
+    4px 0  0 0 currentColor;
+}
+
+.pixel-glow {
+  text-shadow: 2px 2px 0 rgba(0,0,0,0.5);
+}
+
+.pixel-shadow-red {
+  box-shadow:
+    4px 4px 0 #8a0b0b,
+    4px 4px 0 0 #8a0b0b;
 }
